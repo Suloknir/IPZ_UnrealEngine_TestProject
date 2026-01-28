@@ -15,7 +15,11 @@ class IPZ1_API AEyeTrackerSphereDrawActor : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AEyeTrackerSphereDrawActor();
-
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+	UStaticMeshComponent* CursorMesh;
+	TSubclassOf<AActor> GazeCursorClass;
+	AActor* GazeCursorInstance;
+	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -23,5 +27,5 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
+	bool GetGazeCollisionPoint(const FEyeTrackerGazeData& GazeData, FVector& outCollisionPoint);
 };
