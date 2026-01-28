@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "EyeTrackerFunctionLibrary.h"
 #include "EyeTrackerSphereDrawActor.generated.h"
 
 UCLASS()

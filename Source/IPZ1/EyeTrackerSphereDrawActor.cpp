@@ -2,6 +2,7 @@
 
 
 #include "EyeTrackerSphereDrawActor.h"
+#include "DrawDebugHelpers.h"
 
 // Sets default values
 AEyeTrackerSphereDrawActor::AEyeTrackerSphereDrawActor()
