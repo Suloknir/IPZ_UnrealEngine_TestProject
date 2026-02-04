@@ -11,8 +11,6 @@ UEyeTrackerSphereDrawerComponent::UEyeTrackerSphereDrawerComponent()
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
-
-	// ...
 }
 
 
@@ -34,6 +32,7 @@ void UEyeTrackerSphereDrawerComponent::BeginPlay()
 // Called every frame
 void UEyeTrackerSphereDrawerComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
+	// UE_LOG(LogTemp, Warning, TEXT("Camera location: %s", Camera->GetComponentLocation()));
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	FEyeTrackerGazeData GazeData;
 	if (UEyeTrackerFunctionLibrary::GetGazeData(GazeData))
@@ -49,7 +48,7 @@ void UEyeTrackerSphereDrawerComponent::TickComponent(float DeltaTime, ELevelTick
 				CollisionPoint,
 				8.5f,
 				12,
-				FColor::Cyan,
+				FColor::Green,
 				false,
 				-1,
 				0,
@@ -59,33 +58,28 @@ void UEyeTrackerSphereDrawerComponent::TickComponent(float DeltaTime, ELevelTick
 	else
 	{
 		UE_LOG(LogTemp, Warning, TEXT("EyeTracker not detected"));
-		if (Camera)
-		{
-			DrawDebugSphere(
-				GetWorld(),
-				Camera->GetComponentLocation(),
-				20.0f, 
-				12,
-				FColor::Red,
-				false,
-				-1,
-				0,
-				2.0f);
-		}
-	}
+		DrawDebugSphere(
+			GetWorld(),
+			Camera->GetComponentLocation(),
+			20.0f, 
+			12,
+			FColor::Red,
+			false,
+			-1,
+			0,
+			2.0f);
+}
 }
 
 bool UEyeTrackerSphereDrawerComponent::GetGazeCollisionPoint(const FEyeTrackerGazeData& GazeData, FVector& outCollisionPoint)
 {
 	if (!Camera) return false;
 	FVector Start = Camera->GetComponentLocation();
-	FRotator CameraRotation = Camera->GetComponentRotation();
-	
-	FVector WorldDirection = CameraRotation.RotateVector(GazeData.GazeDirection);
-	WorldDirection.Normalize();
+	// FVector WorldDirection = GazeData.GazeDirection; 
+	// WorldDirection.Normalize();
 
 	float TraceLength = 10000.0f; //100 meters
-	FVector End = Start + (WorldDirection * TraceLength);
+	FVector End = Start + (GazeData.GazeDirection * TraceLength);
 
 	FHitResult HitResult;
 	FCollisionQueryParams QueryParams;
