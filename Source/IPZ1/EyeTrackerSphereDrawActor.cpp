@@ -72,7 +72,7 @@ bool AEyeTrackerSphereDrawActor::GetGazeCollisionPoint(const FEyeTrackerGazeData
 	FVector WorldDirection = CameraRotation.RotateVector(GazeData.GazeDirection);
 	WorldDirection.Normalize();
 
-	float TraceLength = 10000.0f; // 100 metrów
+	float TraceLength = 10000.0f; // 100 meters
 	FVector End = Start + (WorldDirection * TraceLength);
 
 	FHitResult HitResult;
