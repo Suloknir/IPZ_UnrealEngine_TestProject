@@ -19,8 +19,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Marking")
 	void SpawnSphere(FVector SpawnLocation, float Diameter = 50.0f);
 	
-	// UFUNCTION(BlueprintCallable, Category = "Marking")
-	// void RemoveSphere(AActor* TargetActor);
+	UFUNCTION(BlueprintCallable, Category = "Marking")
+	void DrawCursor(FVector Location);
 
 // protected:
 	// Called when the game starts

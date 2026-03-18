@@ -42,6 +42,21 @@ void UMarkingTool::SpawnSphere(FVector SpawnLocation, float Diameter)
 	ActiveSpheres.Add(NewSphere);
 }
 
+void UMarkingTool::DrawCursor(FVector Location)
+{
+	DrawDebugSphere(
+		GetWorld(),
+		Location,
+		3.0f,
+		12,
+		FColor::Yellow,
+		false,
+		-1,
+		0,
+		0.75f);
+}
+
+
 // // Called when the game starts
 // void UMarkingTool::BeginPlay()
 // {
